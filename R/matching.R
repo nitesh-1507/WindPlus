@@ -10,6 +10,12 @@ match.cov = function(ref, obj, thres, circ_pos = NULL){
   ref = as.matrix(ref)
   obj = as.matrix(obj)
 
+  # vector to store matched index of observation in obj
+  match = rep(NA, nrow(ref))
+
+  # vector to store index of obj set
+  index = c(1:nrow(obj))
+
 }
 
 
