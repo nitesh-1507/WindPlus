@@ -16,6 +16,13 @@ match.cov = function(ref, obj, thres, circ_pos = NULL){
   # vector to store index of obj set
   index = c(1:nrow(obj))
 
+  # Loop to iterate over each ref observation
+  for(i in 1:nrow(ref)){
+
+    }
+
+
+
 }
 
 
