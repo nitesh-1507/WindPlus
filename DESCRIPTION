@@ -1,14 +1,20 @@
 Package: WindPlus
-Title: What the Package Does (One Line, Title Case)
+Title: Covariates matching and performance quantification.
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "First",
-           family = "Last",
+    person(given = "Nitesh",
+           family = "Kumar",
            role = c("aut", "cre"),
-           email = "first.last@example.com",
+           email = "nitesh.kumar@tamu.edu",
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: What license it uses
+Description: The idea is to take data set from different sources, and
+    and filter out observations from each which exhibit similar charactersitics.
+    The process of doing so is said to be covariates matching, where two different
+    data set are matched using certain nummber of covariates, against a specified
+    theshold. Further, the generated matched data set could be used to quantify the
+    performance (example : different turbines performance comaprison in wind energy 
+    industry and so on) using hypothesis testing and many other approaches.
+License: GPL-2
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
