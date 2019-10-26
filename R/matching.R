@@ -6,6 +6,10 @@
 # circ_pos : position of circular variables (such as wind direction etc), if supplied by user
 match.cov = function(ref, obj, thres, circ_pos = NULL){
 
+  # Ensuring that the data sets are converted to matrix
+  ref = as.matrix(ref)
+  obj = as.matrix(obj)
+
 }
 
 
