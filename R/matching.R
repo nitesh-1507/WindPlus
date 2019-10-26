@@ -79,7 +79,11 @@ match.cov = function(ref, obj, thres, circ_pos = NULL){
 
        # Removing matched index of obj set
        index = index[-id]
-   }
+  }
+
+  # Returns matched index
+  return(match)
+
 }
 
 
