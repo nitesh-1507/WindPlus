@@ -35,11 +35,46 @@ match.cov = function(ref, obj, thres, circ_pos = NULL){
        # Checking which observation in test set matches reference set
        id = which(rowSums(sweep(score, 2, thres, FUN = '<')) == ncol(ref))
 
+       # Checking for multiple matches
+       if(length(id) > 0){
 
-    }
+         # Adjusted score calculated when multiple matches
+         scoreadj = sweep(score, 2, thres, FUN = '/')
 
+         # Calculating max adjusted score for matched index
+         maxscore = rowMaxs(scoreadj[id, , drop = F])
 
+         # Filterig index with min score from maxscore
+         id = id[which.min(maxscore)]
+         colNo = 1
 
+         if(ncol(ref) == 1){
+           while(length(id) > 1){
+
+             # Filtering index with min score if still multiple matches exists
+             score.id = t(apply(scoreadj[id, , drop = F], 1, function(x) sort(x, decreasing = T)))
+             id = which(score.id[ , colNo, drop = F] == min(score.id[ , colNo, drop = F]))
+
+           }
+
+         }else{
+
+           while(length(id)>1){
+
+             # Filtering index with min score if still multiple matches exists
+             colNo = colNo+1
+             score.id = t(apply(scoreadj[id, , drop = F], 1, function(x) sort(x, decreasing = T)))
+             id = which(score.id[, colNo, drop=F] == min(score.id[, colNo, drop = F]))
+
+            }
+         }
+
+       }
+   }
 }
+
+
+
+
 
 
