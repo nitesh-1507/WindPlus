@@ -19,6 +19,23 @@ match.cov = function(ref, obj, thres, circ_pos = NULL){
   # Loop to iterate over each ref observation
   for(i in 1:nrow(ref)){
 
+       # Calculating ratio between obj set and each ref observation
+       ref.i = as.numeric(ref[i, ])
+       score = sweep(abs(sweep(obj, 2, ref.i, FUN = '-')), 2, ref.i, FUN = '/')
+
+       # Adjusting the score of circular
+       if(length(circ_pos > 0)){
+
+         # Manipulating the circular variable difference to fit in the range 0 to 180
+         id.dcor = which(abs(obj[, circ_pos, drop = F] - ref.i[circ_pos]) > 180)
+         score[id.dcor, circ_pos] = (360 - abs(obj[id.dcor, circ_pos, drop = F] - ref.i[circ_pos])) / ref.i[circ_pos]
+
+       }
+
+       # Checking which observation in test set matches reference set
+       id = which(rowSums(sweep(score, 2, thres, FUN = '<')) == ncol(ref))
+
+
     }
 
 
