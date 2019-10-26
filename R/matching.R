@@ -92,6 +92,19 @@ match.cov = function(ref, obj, thres, circ_pos = NULL){
 # circ : position of circular variable supplied by user
 circ.positive = function(data, circ){
 
+  # Iterating over circular variabe
+  for(i in circ){
+
+    while(sum(data[ , i] < 0) != 0){
+
+      data[, i] = data[, i] + 360
+
+    }
+
+  }
+
+  # Returns manipulated data
+  return(data)
 }
 
 
