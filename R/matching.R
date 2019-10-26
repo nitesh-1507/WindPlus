@@ -87,7 +87,12 @@ match.cov = function(ref, obj, thres, circ_pos = NULL){
 }
 
 
+######### Function to convert circular variable values to positive ##################
+# data : data set consiting of features and vlues
+# circ : position of circular variable supplied by user
+circ.positive = function(data, circ){
 
+}
 
 
 
