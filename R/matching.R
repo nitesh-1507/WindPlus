@@ -70,6 +70,15 @@ match.cov = function(ref, obj, thres, circ_pos = NULL){
          }
 
        }
+
+       # Storing matched index of obj set
+       match[i] = index[id]
+
+       # Removing matched index observation from obj set
+       obj = obj[-id, , drop=F]
+
+       # Removing matched index of obj set
+       index = index[-id]
    }
 }
 
