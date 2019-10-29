@@ -50,8 +50,6 @@ Sample result highlighting two data sets distribution - before applying the matc
 
 ![matched](https://user-images.githubusercontent.com/49033958/67720553-3d4d3900-f9a2-11e9-9f76-3ba6df0c0c37.jpg)
 
-
-
 # Installation
 ```R
 devtools::install_github("nitesh-1507/WindPlus")
