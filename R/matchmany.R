@@ -1,3 +1,14 @@
+#' Title
+#'
+#' @param dname
+#' @param cov
+#' @param weight
+#' @param cov_circ
+#'
+#' @return
+#' @export
+#'
+#' @examples
 covmatch.mult = function(dname, cov = NULL, weight = 0.2, cov_circ = NULL ){
   # Loading library
   library(matrixStats)
