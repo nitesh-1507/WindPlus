@@ -72,11 +72,18 @@ covmatch.mult = function(dname, cov = NULL, weight = 0.2, cov_circ = NULL ){
 
   }
 
-  # setting up the reference data set and threshold
+  # Setting up the reference data set and threshold
   ref_id = length(f_name)
   ref = as.matrix(f_name[[ref_id]][, cov_col, drop = F])
 
-  # test files
+  # Test files
   test_id = c(1:length(f_name))[-ref_id]
+
+  # Setting up thresholds
+  ratio = colSds(as.matrix(ref)) / colMeans(ref)
+  thres = ratio * wgt
+
+  # Matching data sets with ref as reference
+  matchID  = lapply(test_id, function(x) match.cov(ref, f_name[[x]][, cov_col, drop = F], thres, pos))
 
 }
