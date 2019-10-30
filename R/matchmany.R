@@ -21,7 +21,7 @@ covmatch.mult = function(dname, cov = NULL, weight = 0.2, cov_circ = NULL ){
   }
 
   # Checks whether the provided data set is a list or not
-  !is.list(dname){
+  if(!is.list(dname)){
 
     stop('Data set provided should be a list containing data sets')
 
