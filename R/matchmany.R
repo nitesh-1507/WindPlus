@@ -30,7 +30,7 @@ covmatch.mult = function(dname, cov = NULL, weight = 0.2, cov_circ = NULL ){
   # Checks for non circular covariates
   if(length(cov) > 0){
 
-    !is.vector(cov){
+    if(!is.vector(cov)){
 
       stop('Non circular covariates column number should be provided as a vector')
 
@@ -40,7 +40,7 @@ covmatch.mult = function(dname, cov = NULL, weight = 0.2, cov_circ = NULL ){
   # Checks for circular covariates
   if(length(cov_circ) > 0){
 
-    !is.vector(cov_circ){
+    if(!is.vector(cov_circ)){
 
       stop('Circular covariates column number should be provided as a vector')
 
