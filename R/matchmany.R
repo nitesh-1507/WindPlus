@@ -86,4 +86,36 @@ covmatch.mult = function(dname, cov = NULL, weight = 0.2, cov_circ = NULL ){
   # Matching data sets with ref as reference
   matchID  = lapply(test_id, function(x) match.cov(ref, f_name[[x]][, cov_col, drop = F], thres, pos))
 
+  # creating list of matched data set
+  matched = rep(list(c()), (length(f_name)))
+
+  # selecting indices of matched data sets
+  # matched reference set
+  refid = (!is.na(matchID[[1]]))
+  if(length(f_name) < 3){
+
+    refid = refid
+
+  } else
+  {
+
+    for(i in 2:(length(f_name)-1))
+    {
+      refid = refid & (!is.na(matchID[[i]]))
+
+    }
+
+  }
+
+  refID = which(refid)
+  matched[[ref_id]] = f_name[[ref_id]][refID, ]
+
+  # matched test set
+  for(j in (1:(length(f_name)-1))){
+
+    matched[[test_id[j]]] = f_name[[test_id[j]]][matchID[[j]][refID], ]
+
+  }
+
+  return(matched)
 }
