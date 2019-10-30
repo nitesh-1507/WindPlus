@@ -50,6 +50,26 @@ covmatch.mult = function(dname, cov = NULL, weight = 0.2, cov_circ = NULL ){
 
   }
 
+  # Store data sets to be compared
+  f_name = dname
 
+  # Weight assigning
+  wgt = weight
+
+  # Covariates column number for matching
+  cov_col = c(cov, cov_circ)
+
+  # Circular variable initial position
+  pos = cov_circ
+
+  # Ensuring circular variable to be between 0 to 360 degree
+  if(length(cov_circ) > 0) {
+
+    f_name = lapply(1:length(f_name), function(x) circ.positive(f_name[[x]], cov_circ))
+
+    # Circular variable after data subsetting position
+    pos = (length(cov)+1):length(cov_col)
+
+  }
 
 }
