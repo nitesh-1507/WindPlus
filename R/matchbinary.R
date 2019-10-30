@@ -87,10 +87,34 @@ covmatch.binary = function(dname, cov, weight = 0.2, cov_circ = NULL ){
   weight = weight
 
   # parrallel computation
-  cl=makeCluster(length(dname))
+  cl = makeCluster(length(dname))
   clusterExport(cl, varlist = list("match.cov","circ.positive"), envir = environment())
   clusterEvalQ(cl,library(parallel))
-  matched_data=(parLapply(cl, X=file_list,fun=covmatch.mult,cov=cov,weight=weight,cov_circ=cov_circ))
+  clusterEvalQ(cl,library(matrixStats))
+  matched_data = (parLapply(cl, X = file_list, fun=covmatch.mult, cov=cov, weight = weight, cov_circ = cov_circ))
   stopCluster(cl)
+
+  ############# Retrieving datasets from 1st matching #########################
+  # creating list of matched data set from step 1
+  match1 = matched_data[[1]]
+  matched1 = rep(list(c()),2)
+
+  matched1[[2]]= match1[[2]]
+  matched1[[1]]= match1[[1]]
+
+  ############# Retrieving datasets from 2nd matching #########################
+  # creating list of matched data set from step 1
+  match2 = matched_data[[2]]
+  matched2 = rep(list(c()),2)
+
+  matched2[[2]]= match2[[1]]
+  matched2[[1]]= match2[[2]]
+
+  ############ Combining results to generate final matched pairs ###################
+  matched = rep(list(c()), 2)
+  matched[[1]] = unique(rbind(matched1[[1]], matched2[[1]]))
+  matched[[2]] = unique(rbind(matched1[[2]], matched2[[2]]))
+
+  return(matched)
 
 }
