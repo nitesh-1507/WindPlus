@@ -72,4 +72,11 @@ covmatch.mult = function(dname, cov = NULL, weight = 0.2, cov_circ = NULL ){
 
   }
 
+  # setting up the reference data set and threshold
+  ref_id = length(f_name)
+  ref = as.matrix(f_name[[ref_id]][, cov_col, drop = F])
+
+  # test files
+  test_id = c(1:length(f_name))[-ref_id]
+
 }
