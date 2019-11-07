@@ -2,13 +2,39 @@
 % Please edit documentation in R/matchbinary.R
 \name{covmatch.binary}
 \alias{covmatch.binary}
-\title{Title}
+\title{Covariate Matching (Match - Two)}
 \usage{
-covmatch.binary(dname, cov, weight = 0.2, cov_circ = NULL)
+Function:
+covmatch.binary(dname, cov, weight, cov_circ)
 }
 \arguments{
-\item{cov_circ}{}
+\item{dname}{This should always be a list, containing all the data sets to match.}
+
+\item{cov}{Vector of column numbers for the covariates to be used in matching.}
+
+\item{weight}{Vector of threshold values, against which matching happens.
+It can be a single value such as 0.2, or vector such as c(0.2, 0.2, 0.3),
+considering three covariates.}
+
+\item{cov_circ}{Vector stating the column position of circular variables such as wind direction,
+nacelle position etc.}
+}
+\value{
+The function returns a list containing after matched data sets.
 }
 \description{
-Title
+The function aims to take exactly two data sets and returns the after
+matched data sets using user specified covariates.
+}
+\examples{
+Consider an example to match 2 data sets.Each data set has 6 covariates
+(4 non circular : column 1 to 4 and 2 circular column 5 to 6). The matching is
+to be done using 4 covariates : 2 circular and 2 non-circular.
+
+dname <- list(data1, data2)
+cov <- c(2, 3)
+weight <- c(0.2, 0.3)
+cov_circ <- c(5, 6)
+
+matched_data = covmatch.binary(dname = dname, cov = cov, weight = weight, cov_circ = cov_circ)
 }

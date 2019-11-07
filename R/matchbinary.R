@@ -1,14 +1,29 @@
-#' Title
-#'
-#' @param dname
-#' @param cov
-#' @param weight
-#' @param cov_circ
-#'
-#' @return
+#' Covariate Matching (Match - Two)
+#' @description The function aims to take exactly two data sets and returns the after
+#' matched data sets using user specified covariates.
+#' @param dname This should always be a list, containing all the data sets to match.
+#' @param cov Vector of column numbers for the covariates to be used in matching.
+#' @param weight Vector of threshold values, against which matching happens.
+#' It can be a single value such as 0.2, or vector such as c(0.2, 0.2, 0.3),
+#' considering three covariates.
+#' @param cov_circ Vector stating the column position of circular variables such as wind direction,
+#'  nacelle position etc.
+#' @usage Function:
+#' covmatch.binary(dname, cov, weight, cov_circ)
+#' @return The function returns a list containing after matched data sets.
 #' @export
 #'
 #' @examples
+#' Consider an example to match 2 data sets.Each data set has 6 covariates
+#' (4 non circular : column 1 to 4 and 2 circular column 5 to 6). The matching is
+#' to be done using 4 covariates : 2 circular and 2 non-circular.
+#'
+#' dname <- list(data1, data2)
+#' cov <- c(2, 3)
+#' weight <- c(0.2, 0.3)
+#' cov_circ <- c(5, 6)
+#'
+#' matched_data = covmatch.binary(dname = dname, cov = cov, weight = weight, cov_circ = cov_circ)
 covmatch.binary = function(dname, cov, weight = 0.2, cov_circ = NULL ){
   # Loading library
   library(parallel)
