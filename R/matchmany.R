@@ -1,14 +1,29 @@
-#' Title
-#'
-#' @param dname
-#' @param cov
-#' @param weight
-#' @param cov_circ
-#'
-#' @return
+#' Covariate Matching (Match - Many)
+#' @description The function aims to take different data sets and returns the after
+#' matched data sets using user specified covariates.
+#' @param dname This should always be a list, containing all the data sets to match.
+#' @param cov   Vector of column numbers for the covariates to be used in matching.
+#' @param weight Vector of threshold values, against which matching happens.
+#' It can be a single value such as 0.2, or vector such as c(0.2, 0.2, 0.3),
+#' considering three covariates.
+#' @param cov_circ Vector stating the column position of circular variables such as wind direction,
+#'  nacelle position etc.
+#' @usage Function:
+#' covmatch.mult(dname, cov, weight, cov_circ)
+#' @return The function returns a list containing after matched data sets.
 #' @export
 #'
 #' @examples
+#' Consider an example to match 3 data sets.Eeach data set has 6 covariates
+#' (4 non circular : column 1 to 4 and 2 circular column 5 to 6). The matching is
+#' to be done using 4 covariates : 2 circular and 2 non-circular.
+#'
+#' dname <- list(data1, data2, data3)
+#' cov <- c(2, 3)
+#' weight <- c(0.2, 0.3)
+#' cov_circ <- c(5, 6)
+#'
+#' matched_data = covmatch.mult(dname = dname, cov = cov, weight = weight, cov_circ = cov_circ)
 covmatch.mult = function(dname, cov = NULL, weight = 0.2, cov_circ = NULL ){
   # Loading library
   library(matrixStats)
