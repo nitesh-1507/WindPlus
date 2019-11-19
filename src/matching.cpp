@@ -80,7 +80,19 @@ arma::vec matchcov(arma::mat& ref , arma::mat& obj, arma::rowvec& thres, arma::r
     // Vector to store unmatched observations index
     arma::uvec unmatched_id;
 
+    // filtering incase of multiple match
+    if(id_index.n_elem > 0){
 
+      // Calculating adjusted score and filtering most similar
+      score_adjusted = score.each_row() / thres;
+      maxscore = arma::max(score_adjusted.rows(id_index), 1);
+      min_score = arma::min(maxscore);
+      min_id = find(maxscore == min_score);
+      id_min = id_index(min_id(0));
+
+
+
+    }
 
   }
 
