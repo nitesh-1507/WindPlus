@@ -83,8 +83,11 @@ covmatch.mult = function(dname, cov = NULL, weight = 0.2, cov_circ = NULL ){
   # Covariates column number for matching
   cov_col = c(cov, cov_circ)
 
-  # Circular variable presence indicator
+  # Circular variable position indicator
   pos = 0
+
+  # Circular variable presence indicator
+  flag = 0
 
   # Ensuring circular variable to be between 0 to 360 degree
   if(length(cov_circ) > 0) {
