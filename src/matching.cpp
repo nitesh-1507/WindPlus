@@ -90,10 +90,22 @@ arma::vec matchcov(arma::mat& ref , arma::mat& obj, arma::rowvec& thres, arma::r
       min_id = find(maxscore == min_score);
       id_min = id_index(min_id(0));
 
+      // Storing the index of matched observation in obj
+      match(i) = index(arma::conv_to<int>::from(id_min));
 
+      // Index of unmatched observation in obj
+      unmatched_id = find(index != arma::conv_to<double>::from(id_min));
 
-    }
+      // Removing matched observation from obj
+      obj = obj.rows(unmatched_id);
+
+      // Removing matched index from index vector created before
+      index = index.elem(unmatched_id);
+
+     }
 
   }
+
+  return match;
 
 }
