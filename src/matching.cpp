@@ -23,4 +23,18 @@ arma::vec matchcov(arma::mat& ref , arma::mat& obj, arma::rowvec& thres, arma::r
   // Vector to store index of obj data set
   arma::vec index = arma::linspace(1, row_obj, row_obj);
 
+  // Looping through each element of reference set
+  for(int i = 0; i < row_ref; i++){
+
+
+
+
+
+
+
+
+
+
+  }
+
 }
