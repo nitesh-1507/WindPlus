@@ -1,3 +1,6 @@
+#' @useDynLib packagetest
+#' @importFrom Rcpp sourceCpp
+
 ######### function to match data set##################
 # match.cov : main matching function given data sets
 # ref : data set considered as a reference
