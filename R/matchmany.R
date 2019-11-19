@@ -120,7 +120,7 @@ covmatch.mult = function(dname, cov = NULL, weight = 0.2, cov_circ = NULL ){
 
   # selecting indices of matched data sets
   # matched reference set
-  refid = (!is.na(matchID[[1]]))
+  refid = ((matchID[[1]]) > 0)
   if(length(f_name) < 3){
 
     refid = refid
@@ -130,7 +130,7 @@ covmatch.mult = function(dname, cov = NULL, weight = 0.2, cov_circ = NULL ){
 
     for(i in 2:(length(f_name)-1))
     {
-      refid = refid & (!is.na(matchID[[i]]))
+      refid = refid & ((matchID[[i]]) > 0)
 
     }
 
