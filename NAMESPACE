@@ -2,3 +2,7 @@
 
 export(covmatch.binary)
 export(covmatch.mult)
+import(matrixStats)
+import(parallel)
+importFrom(Rcpp,sourceCpp)
+useDynLib(WindPlus)

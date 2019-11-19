@@ -68,7 +68,7 @@ covmatch.mult = function(dname, cov = NULL, weight = 0.2, cov_circ = NULL ){
   }
 
   # Checks for dimension compatibility of weight supplied
-  if(!(length(weight) == 1) || !(length(weight) == length(c(cov, cov_circ)))){
+  if(!(length(weight) == length(c(cov, cov_circ)))){
 
     stop('The weight provided should be a single value or vector with weight for each covariate')
 
@@ -114,7 +114,7 @@ covmatch.mult = function(dname, cov = NULL, weight = 0.2, cov_circ = NULL ){
   thres = ratio * wgt
 
   # Matching data sets with ref as reference
-  matchID  = lapply(test_id, function(x) match.cov(ref, f_name[[x]][, cov_col, drop = F], thres, pos = pos, flag = flag))
+  matchID  = lapply(test_id, function(x) match.cov(ref, f_name[[x]][, cov_col, drop = F], thres, circ_pos = pos, flag = flag))
 
   # creating list of matched data set
   matched = rep(list(c()), (length(f_name)))

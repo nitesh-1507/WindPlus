@@ -70,7 +70,7 @@ covmatch.binary = function(dname, cov, weight = 0.2, cov_circ = NULL ){
   }
 
   # Checks for dimension compatibility of weight supplied
-  if(!(length(weight) == 1) || !(length(weight) == length(c(cov, cov_circ)))){
+  if(!(length(weight) == length(c(cov, cov_circ)))){
 
     stop('The weight provided should be a single value or vector with weight for each covariate')
 
@@ -107,7 +107,7 @@ covmatch.binary = function(dname, cov, weight = 0.2, cov_circ = NULL ){
   parallel::clusterEvalQ(cl,library(parallel))
   parallel::clusterEvalQ(cl,library(matrixStats))
   matched_data = (parallel::parLapply(cl, X = file_list, fun=covmatch.mult, cov=cov, weight = weight, cov_circ = cov_circ))
-  paralle::stopCluster(cl)
+  parallel::stopCluster(cl)
 
   ############# Retrieving datasets from 1st matching #########################
   # creating list of matched data set from step 1
