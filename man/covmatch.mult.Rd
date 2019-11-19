@@ -27,7 +27,7 @@ The function aims to take different data sets and returns the after
 matched data sets using user specified covariates.
 }
 \examples{
-Consider an example to match 3 data sets.Eeach data set has 6 covariates
+Consider an example to match 3 data sets.Each data set has 6 covariates
 (4 non circular : column 1 to 4 and 2 circular column 5 to 6). The matching is
 to be done using 4 covariates : 2 circular and 2 non-circular.
 
