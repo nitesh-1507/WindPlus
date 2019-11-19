@@ -25,8 +25,6 @@
 #'
 #' matched_data = covmatch.mult(dname = dname, cov = cov, weight = weight, cov_circ = cov_circ)
 covmatch.mult = function(dname, cov = NULL, weight = 0.2, cov_circ = NULL ){
-  # Loading library
-  library(matrixStats)
 
   # Checks for number of data sets provided by user
   if(length(dname) < 2){
@@ -109,7 +107,7 @@ covmatch.mult = function(dname, cov = NULL, weight = 0.2, cov_circ = NULL ){
   test_id = c(1:length(f_name))[-ref_id]
 
   # Setting up thresholds
-  ratio = colSds(as.matrix(ref)) / colMeans(ref)
+  ratio = matrixStats::colSds(as.matrix(ref)) / colMeans(ref)
   thres = ratio * wgt
 
   # Matching data sets with ref as reference
