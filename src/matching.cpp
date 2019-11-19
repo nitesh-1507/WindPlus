@@ -10,7 +10,7 @@
 using namespace Rcpp;
 
 // [[Rcpp::export]]
-arma::vec matchcov(arma::mat& ref , arma::mat& obj, arma::rowvec& thres, arma::rowvec& circ_pos, int pos)
+arma::vec matchcov(arma::mat& ref , arma::mat& obj, arma::rowvec& thres, arma::rowvec& circ_pos, int flag)
 {
   // Variables to store no of rows
   int row_ref = ref.n_rows;
@@ -32,7 +32,7 @@ arma::vec matchcov(arma::mat& ref , arma::mat& obj, arma::rowvec& thres, arma::r
     score = score.each_row() / ref_i;
 
     // If circular variable supplied, extracting corresponding data sets
-    if(pos > 0){
+    if(flag > 0){
 
        // Circular variable as vector in ref and matrix in obj
        arma::vec circref = ref_i(arma::conv_to<arma::uvec>::from(circ_pos - 1));
