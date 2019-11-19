@@ -102,12 +102,12 @@ covmatch.binary = function(dname, cov, weight = 0.2, cov_circ = NULL ){
   weight = weight
 
   # parrallel computation
-  cl = makeCluster(length(dname))
-  clusterExport(cl, varlist = list("match.cov","circ.positive"), envir = environment())
-  clusterEvalQ(cl,library(parallel))
-  clusterEvalQ(cl,library(matrixStats))
-  matched_data = (parLapply(cl, X = file_list, fun=covmatch.mult, cov=cov, weight = weight, cov_circ = cov_circ))
-  stopCluster(cl)
+  cl = parallel::makeCluster(length(dname))
+  parallel::clusterExport(cl, varlist = list("match.cov","circ.positive"), envir = environment())
+  parallel::clusterEvalQ(cl,library(parallel))
+  parallel::clusterEvalQ(cl,library(matrixStats))
+  matched_data = (parallel::parLapply(cl, X = file_list, fun=covmatch.mult, cov=cov, weight = weight, cov_circ = cov_circ))
+  paralle::stopCluster(cl)
 
   ############# Retrieving datasets from 1st matching #########################
   # creating list of matched data set from step 1
