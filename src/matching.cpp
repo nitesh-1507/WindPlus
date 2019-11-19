@@ -42,8 +42,22 @@ arma::vec matchcov(arma::mat& ref , arma::mat& obj, arma::rowvec& thres, arma::r
        // Loop to update circular variable score
        for(int j = 0; j < cols; j++){
 
+         // Updating score of circular variable
+         arma::uvec id_dcor = arma::find((circdata.col(j) - circref(j)) > 180);
+         arma::vec score_vec = score.col(j);
+         arma::vec circdata_vec = circdata.col(j);
+         score_vec(id_dcor) = (360 - (circdata_vec(id_dcor) - circref(j))) / circref(j);
+         score.col(j) = score_vec;
 
+          }
        }
+
+    // Checking calculated score against threshold
+    arma::umat decision(obj.n_rows, obj.n_cols);
+    for(int k = 0; k < obj.n_cols; k++) {
+
+      arma::uvec des = score.col(k) < thres(k);
+      decision.col(k) = des;
 
     }
 
