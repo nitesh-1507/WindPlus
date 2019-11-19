@@ -85,8 +85,8 @@ covmatch.mult = function(dname, cov = NULL, weight = 0.2, cov_circ = NULL ){
   # Covariates column number for matching
   cov_col = c(cov, cov_circ)
 
-  # Circular variable initial position
-  pos = cov_circ
+  # Circular variable presence indicator
+  pos = 0
 
   # Ensuring circular variable to be between 0 to 360 degree
   if(length(cov_circ) > 0) {
@@ -95,6 +95,9 @@ covmatch.mult = function(dname, cov = NULL, weight = 0.2, cov_circ = NULL ){
 
     # Circular variable after data subsetting position
     pos = (length(cov)+1):length(cov_col)
+
+    # Circular variable indicator
+    flag = 1
 
   }
 
@@ -110,7 +113,7 @@ covmatch.mult = function(dname, cov = NULL, weight = 0.2, cov_circ = NULL ){
   thres = ratio * wgt
 
   # Matching data sets with ref as reference
-  matchID  = lapply(test_id, function(x) match.cov(ref, f_name[[x]][, cov_col, drop = F], thres, pos))
+  matchID  = lapply(test_id, function(x) match.cov(ref, f_name[[x]][, cov_col, drop = F], thres, pos = pos, flag = flag))
 
   # creating list of matched data set
   matched = rep(list(c()), (length(f_name)))
