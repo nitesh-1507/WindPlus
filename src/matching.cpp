@@ -61,8 +61,24 @@ arma::vec matchcov(arma::mat& ref , arma::mat& obj, arma::rowvec& thres, arma::r
 
     }
 
+    // Finding index of obj data set whose score <= threshold
+    arma::mat id = arma::conv_to<arma::mat>::from(decision);
+    arma::vec id_sum = sum(id, 1);
+    arma::uvec id_index = find(id_sum == obj.n_cols);
 
+    // Vector to score adjusted score
+    arma::mat score_adjusted;
 
+    // vector to store maxscore out of matched index
+    arma::vec maxscore;
+
+    // Variables and vectors to store min score out of max score and index
+    double min_score;
+    arma::uvec min_id;
+    arma::uvec id_min;
+
+    // Vector to store unmatched observations index
+    arma::uvec unmatched_id;
 
 
 
