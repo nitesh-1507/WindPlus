@@ -12,7 +12,7 @@
 #' covmatch.binary(dname, cov, weight, cov_circ)
 #' @return The function returns a list containing after matched data sets.
 #' @export
-#'
+#' @import parallel
 #' @examples
 #' Consider an example to match 2 data sets.Each data set has 6 covariates
 #' (4 non circular : column 1 to 4 and 2 circular column 5 to 6). The matching is

@@ -1,4 +1,4 @@
-#' @useDynLib packagetest
+#' @useDynLib WindPlus
 #' @importFrom Rcpp sourceCpp
 
 ######### function to match data set##################
