@@ -26,12 +26,26 @@ arma::vec matchcov(arma::mat& ref , arma::mat& obj, arma::rowvec& thres, arma::r
   // Looping through each element of reference set
   for(int i = 0; i < row_ref; i++){
 
-    //# Calculating ratio between obj set and each ref observation
+    // Calculating ratio between obj set and each ref observation
     arma::rowvec ref_i = ref.row(i);
     arma::mat score = arma::abs(obj.each_row() - ref_i);
     score = score.each_row() / ref_i;
 
+    // If circular variable supplied, extracting corresponding data sets
+    if(pos > 0){
 
+       // Circular variable as vector in ref and matrix in obj
+       arma::vec circref = ref_i(arma::conv_to<arma::uvec>::from(circ_pos - 1));
+       arma::mat circdata = obj.cols(arma::conv_to<arma::uvec>::from(circ_pos - 1));
+       int cols = circdata.n_cols;
+
+       // Loop to update circular variable score
+       for(int j = 0; j < cols; j++){
+
+
+       }
+
+    }
 
 
 
