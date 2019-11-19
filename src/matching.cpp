@@ -26,7 +26,10 @@ arma::vec matchcov(arma::mat& ref , arma::mat& obj, arma::rowvec& thres, arma::r
   // Looping through each element of reference set
   for(int i = 0; i < row_ref; i++){
 
-
+    //# Calculating ratio between obj set and each ref observation
+    arma::rowvec ref_i = ref.row(i);
+    arma::mat score = arma::abs(obj.each_row() - ref_i);
+    score = score.each_row() / ref_i;
 
 
 
