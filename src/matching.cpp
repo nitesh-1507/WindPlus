@@ -94,7 +94,7 @@ arma::vec matchcov(arma::mat& ref , arma::mat& obj, arma::rowvec& thres, arma::r
       match(i) = index(arma::conv_to<int>::from(id_min));
 
       // Index of unmatched observation in obj
-      unmatched_id = find(index != arma::conv_to<double>::from(id_min));
+      unmatched_id = find(index != match(i));
 
       // Removing matched observation from obj
       obj = obj.rows(unmatched_id);
