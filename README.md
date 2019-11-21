@@ -73,7 +73,34 @@ matched = covmatch.binary(dname, cov = c(1, 6), weight = (0.2, 0.2), cov_circ = 
 The function can be used to match, when the number of data sets are more than two.
 
 ```R
-matched = covmatch.mult(dname, cov = c(1, 6, 8), weight = (0.2, 0.2, 0.2), cov_circ = NULL )
+# Prepare data set for matching
+dname = rep(list(), 3)
+dname[[1]] = data1
+dname[[2]] = data2
+dname[[3]] = data3
+
+# Non circular covariates column
+cov = c(1, 6, 14)
+
+# Weight 
+weight = c(0.2, 0.2, 0.2)
+
+# Matching
+matched = covmatch.mult(dname = dname, weight = weight, cov = cov, cov_circ = NULL)
+
+# Commpare result of one covariate with original data
+par(mfrow =  c(1, 2))
+par(bg = 'grey')
+
+plot(density(dname[[1]][, 1]), col = 'red', main = 'Before Matching', xlab = 'Wind Speed (m/s)')
+lines(density(dname[[2]][,1]), col = 'blue')
+lines(density(dname[[3]][,1]), col = 'green')
+legend('topright',legend = c('Season1', 'Season2', 'Season3'), col=c("red", "blue"), lty=1)
+
+plot(density(matched[[1]][, 1]), col = 'red', main = 'After Matching', xlab = 'Wind Speed (m/s)')
+lines(density(matched[[2]][,1]), col = 'blue')
+lines(density(matched[[3]][,1]), col = 'green')
+legend('topright',legend = c('Season1', 'Season2', 'Season3'), col=c("red", "blue"), lty=1)
 ```
 Note :- Even covmatch.mult() function can be used to match two data sets, but it is suggested to use covmatch.binary() when the number of data sets are two.
 
