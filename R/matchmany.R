@@ -14,16 +14,13 @@
 #' @export
 #' @import matrixStats
 #' @examples
-#' Consider an example to match 3 data sets.Each data set has 6 covariates
-#' (4 non circular : column 1 to 4 and 2 circular column 5 to 6). The matching is
-#' to be done using 4 covariates : 2 circular and 2 non-circular.
+#' Consider an example to match 3 data sets.
 #'
-#' dname <- list(data1, data2, data3)
-#' cov <- c(2, 3)
-#' weight <- c(0.2, 0.3)
-#' cov_circ <- c(5, 6)
+#' dname <- list(Season1, Season2, Season3)
+#' cov <- c(1, 6, 14)
+#' weight <- c(0.2, 0.2, 0.2)
 #'
-#' matched_data = covmatch.mult(dname = dname, cov = cov, weight = weight, cov_circ = cov_circ)
+#' matched_data = covmatch.mult(dname = dname, cov = cov, weight = weight, cov_circ = Null)
 covmatch.mult = function(dname, cov = NULL, weight = 0.2, cov_circ = NULL ){
 
   # Checks for number of data sets provided by user

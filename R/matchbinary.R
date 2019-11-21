@@ -14,16 +14,13 @@
 #' @export
 #' @import parallel
 #' @examples
-#' Consider an example to match 2 data sets.Each data set has 6 covariates
-#' (4 non circular : column 1 to 4 and 2 circular column 5 to 6). The matching is
-#' to be done using 4 covariates : 2 circular and 2 non-circular.
+#' Consider an example to match exactly 2 data sets.
 #'
 #' dname <- list(data1, data2)
-#' cov <- c(2, 3)
-#' weight <- c(0.2, 0.3)
-#' cov_circ <- c(5, 6)
+#' cov <- c(6, 1, 13)
+#' weight <- c(0.1, 0.1, 0.5)
 #'
-#' matched_data = covmatch.binary(dname = dname, cov = cov, weight = weight, cov_circ = cov_circ)
+#' matched_data = covmatch.binary(dname = dname, cov = cov, weight = weight, cov_circ = Null)
 covmatch.binary = function(dname, cov, weight = 0.2, cov_circ = NULL ){
   # Loading library
   library(parallel)
