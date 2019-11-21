@@ -4,7 +4,6 @@
 - [Theory](#theory)
     - [1. Definition](#definition)
     - [2. Algorithm](#algorithm)
-    - [3. Sample result](#sample-result)
 - [Installation](#installation)
 - [Usage](#usage)
     - [1. Matching binary](#matching-binary)
@@ -32,7 +31,7 @@ computed.
 3. Go through the data records in the non-treated group, Q<sub>bef</sub>, by selecting
 the subset of data records such that the difference, in terms of the
 designated covariate, between the data record j in Q<sub>aft</sub> and any one of
-the records in Q<sub>bef</sub> is smaller than a pre-specified threshold. When
+the records in Q<sub>bef</sub> is smaller than a pre-specified threshold. When
 V is in fact the one designated in Step 2, the resulting subset is then
 labeled by placing V as the subscript to Q, namely Q<sub>V</sub> .
 4. Next, designate another covariate and use it to prune Q<sub>V</sub> in the same
@@ -44,11 +43,6 @@ covariates are used.
 1. Select the most similar record from Q<sub>bef</sub> for each Q<sub>aft</sub> using mahalanobis distance as the similarity measure.
 2. Remove the record from Q<sub>aft</sub>, if a record in Q<sub>bef</sub> satisfies the above mentioned criteria. 
 3. Repeat the process for each record in Q<sub>aft</sub>
-
-### 3. Sample result
-Sample result highlighting two data sets distribution - before applying the matching technique and after applying the technique for a single covariate.
-
-![matched](https://user-images.githubusercontent.com/49033958/67720553-3d4d3900-f9a2-11e9-9f76-3ba6df0c0c37.jpg)
 
 # Installation
 ```R
@@ -66,18 +60,51 @@ library(WindPlus)
 The function can be used to match, when the number data sets are two.
 
 ```R
-matched = covmatch.binary(dname, cov = c(1, 6), weight = (0.2, 0.2), cov_circ = NULL )
+# Load library
+library(WindPlus)
+
+# Prepare data set for matching
+dname = rep(list(), 2)
+dname[[1]] = data1
+dname[[2]] = data2
+
+
+# Non circular covariates column
+cov = c(6, 1, 13)
+
+# Weight 
+weight = c(0.1, 0.1, 0.05)
+
+# Matching
+matched = covmatch.binary(dname = dname, weight = weight, cov = cov, cov_circ = NULL)
+
+# Commpare result of one covariate with original data
+par(mfrow =  c(1, 2))
+par(bg = 'grey')
+
+plot(density(dname[[1]][, 13]), col = 'red', main = 'Before Matching', xlab = 'Turbulence Intensity', lwd = 2, ylim = c(0, 8))
+lines(density(dname[[2]][,13]), col = 'blue', lwd = 2, ylim = c(0, 8), ylim = c(0, 8))
+legend('topright',legend = c('data1', 'data2'), col=c("red", "blue"), lty=1, lwd = 2)
+
+plot(density(matched[[1]][, 13]), col = 'red', main = 'After Matching', xlab = 'Turbulence Intensity', lwd = 2, ylim = c(0, 8))
+lines(density(matched[[2]][,13]), col = 'blue', lwd = 2, ylim = c(0, 8))
+legend('topright',legend = c('data1', 'data2'), col=c("red", "blue"), lty=1, lwd = 2)
+
 ```
+![github_plot2](https://user-images.githubusercontent.com/49033958/69360049-74d09d80-0c4f-11ea-95ed-9c7a726ad91f.jpeg)
 
 ### 2. Matching many
 The function can be used to match, when the number of data sets are more than two.
 
 ```R
+# Load library
+library(WindPlus)
+
 # Prepare data set for matching
 dname = rep(list(), 3)
-dname[[1]] = data1
-dname[[2]] = data2
-dname[[3]] = data3
+dname[[1]] = Season1
+dname[[2]] = Season2
+dname[[3]] = Season3
 
 # Non circular covariates column
 cov = c(1, 6, 14)
@@ -92,16 +119,18 @@ matched = covmatch.mult(dname = dname, weight = weight, cov = cov, cov_circ = NU
 par(mfrow =  c(1, 2))
 par(bg = 'grey')
 
-plot(density(dname[[1]][, 1]), col = 'red', main = 'Before Matching', xlab = 'Wind Speed (m/s)')
-lines(density(dname[[2]][,1]), col = 'blue')
-lines(density(dname[[3]][,1]), col = 'green')
-legend('topright',legend = c('Season1', 'Season2', 'Season3'), col=c("red", "blue"), lty=1)
+plot(density(dname[[1]][, 1]), col = 'red', main = 'Before Matching', xlab = 'Wind Speed (m/s)', lwd = 2)
+lines(density(dname[[2]][,1]), col = 'blue', lwd = 2)
+lines(density(dname[[3]][,1]), col = 'green', lwd = 2)
+legend('topright',legend = c('Season1', 'Season2', 'Season3'), col=c("red", "blue"), lty=1, lwd = 2)
 
-plot(density(matched[[1]][, 1]), col = 'red', main = 'After Matching', xlab = 'Wind Speed (m/s)')
-lines(density(matched[[2]][,1]), col = 'blue')
-lines(density(matched[[3]][,1]), col = 'green')
-legend('topright',legend = c('Season1', 'Season2', 'Season3'), col=c("red", "blue"), lty=1)
+plot(density(matched[[1]][, 1]), col = 'red', main = 'After Matching', xlab = 'Wind Speed (m/s)', lwd = 2)
+lines(density(matched[[2]][,1]), col = 'blue', lwd = 2)
+lines(density(matched[[3]][,1]), col = 'green', lwd = 2)
+legend('topright',legend = c('Season1', 'Season2', 'Season3'), col=c("red", "blue"), lty=1, lwd = 2)
 ```
+![github_plot1](https://user-images.githubusercontent.com/49033958/69360137-a5b0d280-0c4f-11ea-8359-8bdedf90a1a5.jpeg)
+
 Note :- Even covmatch.mult() function can be used to match two data sets, but it is suggested to use covmatch.binary() when the number of data sets are two.
 
 # Details
