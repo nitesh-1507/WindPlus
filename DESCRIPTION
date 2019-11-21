@@ -1,5 +1,5 @@
 Package: WindPlus
-Title: Covariates matching and performance quantification.
+Title: Covariates matching and performance quantification
 Version: 1.0
 Authors@R: 
     person(given = "Nitesh",
@@ -22,4 +22,6 @@ LinkingTo:
     Rcpp,
     RcppArmadillo
 Imports: 
-    Rcpp
+    Rcpp,
+    parallel,
+    matrixStats
