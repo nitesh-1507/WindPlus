@@ -4,7 +4,6 @@
 \alias{covmatch.binary}
 \title{Covariate Matching (Match - Two)}
 \usage{
-Function:
 covmatch.binary(dname, cov, weight, cov_circ)
 }
 \arguments{
@@ -27,11 +26,10 @@ The function aims to take exactly two data sets and returns the after
 matched data sets using user specified covariates.
 }
 \examples{
-Consider an example to match exactly 2 data sets.
 
-dname <- list(data1, data2)
+fname <- list(data1, data2)
 cov <- c(6, 1, 13)
 weight <- c(0.1, 0.1, 0.5)
 
-matched_data = covmatch.binary(dname = dname, cov = cov, weight = weight, cov_circ = Null)
+matched_data = covmatch.binary(fname, cov = cov, weight = weight)
 }

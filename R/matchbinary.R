@@ -8,31 +8,18 @@
 #' considering three covariates.
 #' @param cov_circ Vector stating the column position of circular variables such as wind direction,
 #'  nacelle position etc.
-#' @usage Function:
-#' covmatch.binary(dname, cov, weight, cov_circ)
+#' @usage covmatch.binary(dname, cov, weight, cov_circ)
 #' @return The function returns a list containing after matched data sets.
 #' @export
 #' @import parallel
 #' @examples
 #'
-#' dname <- list(data1, data2)
+#' fname <- list(data1, data2)
 #' cov <- c(6, 1, 13)
 #' weight <- c(0.1, 0.1, 0.5)
 #'
-#' matched_data = covmatch.binary(dname = dname, cov = cov, weight = weight, cov_circ = Null)
-#' par(mfrow =  c(1, 2))
-#' par(bg = 'grey')
-
-#' plot(density(dname[[1]][, 13]), col = 'red', main = 'Before Matching', xlab = 'Turbulence Intensity', lwd = 2, ylim = c(0, 8))
-#' lines(density(dname[[2]][,13]), col = 'blue', lwd = 2, ylim = c(0, 8), ylim = c(0, 8))
-#' legend('topright',legend = c('data1', 'data2'), col=c("red", "blue"), lty=1, lwd = 2)
-
-#' plot(density(matched[[1]][, 13]), col = 'red', main = 'After Matching', xlab = 'Turbulence Intensity', lwd = 2, ylim = c(0, 8))
-#' lines(density(matched[[2]][,13]), col = 'blue', lwd = 2, ylim = c(0, 8))
-#' legend('topright',legend = c('data1', 'data2'), col=c("red", "blue"), lty=1, lwd = 2)
+#' matched_data = covmatch.binary(fname, cov = cov, weight = weight)
 covmatch.binary = function(dname, cov, weight = 0.2, cov_circ = NULL ){
-  # Loading library
-  library(parallel)
 
   if(length(dname) != 2){
 

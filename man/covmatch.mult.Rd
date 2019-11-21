@@ -4,7 +4,6 @@
 \alias{covmatch.mult}
 \title{Covariate Matching (Match - Many)}
 \usage{
-Function:
 covmatch.mult(dname, cov, weight, cov_circ)
 }
 \arguments{
@@ -27,11 +26,10 @@ The function aims to take different data sets and returns the after
 matched data sets using user specified covariates.
 }
 \examples{
-Consider an example to match 3 data sets.
 
-dname <- list(Season1, Season2, Season3)
+fname <- list(Season1, Season2, Season3)
 cov <- c(1, 6, 14)
 weight <- c(0.2, 0.2, 0.2)
 
-matched_data = covmatch.mult(dname = dname, cov = cov, weight = weight, cov_circ = Null)
+matched_data = covmatch.mult(fname, cov = cov, weight = weight)
 }

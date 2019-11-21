@@ -14,6 +14,8 @@ Description: The idea is to take data set from different sources, and
     theshold. Further, the generated matched data set could be used to quantify the
     performance (example : different turbines performance comaprison in wind energy 
     industry and so on) using hypothesis testing and many other approaches.
+Depends:
+    R (>= 2.15)    
 License: GPL-2
 Encoding: UTF-8
 LazyData: true
@@ -23,6 +25,8 @@ LinkingTo:
     RcppArmadillo
 Imports: 
     Rcpp,
-    RcppArmadillo,
     parallel,
+    RcppArmadillo,
     matrixStats
+
+
