@@ -23,5 +23,6 @@ LinkingTo:
     RcppArmadillo
 Imports: 
     Rcpp,
+    RcppArmadillo,
     parallel,
     matrixStats

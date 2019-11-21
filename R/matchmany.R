@@ -21,6 +21,19 @@
 #' weight <- c(0.2, 0.2, 0.2)
 #'
 #' matched_data = covmatch.mult(dname = dname, cov = cov, weight = weight, cov_circ = Null)
+#'
+#' par(mfrow =  c(1, 2))
+#' par(bg = 'grey')
+
+#' plot(density(dname[[1]][, 1]), col = 'red', main = 'Before Matching', xlab = 'Wind Speed (m/s)', lwd = 2)
+#' lines(density(dname[[2]][,1]), col = 'blue', lwd = 2)
+#' lines(density(dname[[3]][,1]), col = 'green', lwd = 2)
+#' legend('topright',legend = c('Season1', 'Season2', 'Season3'), col=c("red", "blue"), lty=1, lwd = 2)
+
+#' plot(density(matched[[1]][, 1]), col = 'red', main = 'After Matching', xlab = 'Wind Speed (m/s)', lwd = 2)
+#' lines(density(matched[[2]][,1]), col = 'blue', lwd = 2)
+#' lines(density(matched[[3]][,1]), col = 'green', lwd = 2)
+#' legend('topright',legend = c('Season1', 'Season2', 'Season3'), col=c("red", "blue"), lty=1, lwd = 2)
 covmatch.mult = function(dname, cov = NULL, weight = 0.2, cov_circ = NULL ){
 
   # Checks for number of data sets provided by user
