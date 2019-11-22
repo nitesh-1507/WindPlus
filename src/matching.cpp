@@ -54,7 +54,9 @@ arma::vec matchcov(arma::mat& ref , arma::mat& obj, arma::rowvec& thres, arma::r
 
     // Checking calculated score against threshold
     arma::umat decision(obj.n_rows, obj.n_cols);
-    for(int k = 0; k < obj.n_cols; k++) {
+    int obj_col = obj.n_cols;
+
+    for(int k = 0; k < obj_col; k++) {
 
       arma::uvec des = score.col(k) < thres(k);
       decision.col(k) = des;
@@ -81,7 +83,8 @@ arma::vec matchcov(arma::mat& ref , arma::mat& obj, arma::rowvec& thres, arma::r
     arma::uvec unmatched_id;
 
     // filtering incase of multiple match
-    if(id_index.n_elem > 0){
+    int id_num = id_index.n_elem;
+    if(id_num > 0){
 
       // Calculating adjusted score and filtering most similar
       score_adjusted = score.each_row() / thres;
