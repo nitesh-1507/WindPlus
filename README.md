@@ -45,6 +45,21 @@ covariates are used.
 3. Repeat the process for each record in Q<sub>aft</sub>
 
 # Installation
+The package building relies on certain tool chains in windows and mac respectively, as the compiler for C++ code along with package devtools
+
+**Step 1 (Download necessary tool chain):**
+
+Tool chain : [Rtools - Windows](https://cran.r-project.org/bin/windows/Rtools/), [GFortran - Mac OS](https://gcc.gnu.org/wiki/GFortranBinariesMacOS)
+
+**Step 2 (Install package devtools in R):**
+
+Install package devtools:
+```R
+install.packages("devtools")
+```
+
+**Step 3 (Build package using devtools):**
+
 ```R
 devtools::install_github("nitesh-1507/WindPlus")
 ```
