@@ -82,16 +82,16 @@ matched = covmatch.binary(dname = dname, weight = weight, cov = cov, cov_circ = 
 par(mfrow =  c(1, 2))
 par(bg = 'grey')
 
-plot(density(dname[[1]][, 13]), col = 'red', main = 'Before Matching', xlab = 'Turbulence Intensity', lwd = 2, ylim = c(0, 8))
-lines(density(dname[[2]][,13]), col = 'blue', lwd = 2, ylim = c(0, 8), ylim = c(0, 8))
-legend('topright',legend = c('data1', 'data2'), col=c("red", "blue"), lty=1, lwd = 2)
+plot(density(dname[[1]][, 13]), col = 'red', main = 'Before Matching', xlab = 'Turbulence Intensity', lwd = 2, xlim = c(0, 0.8), ylim = c(0, 8))
+lines(density(dname[[2]][, 13]), col = 'blue', lwd = 2, ylim = c(0, 8), xlim = c(0, 0.8), ylim = c(0, 8))
+legend('topright', legend = c('data1', 'data2'), col=c("red", "blue"), lty=1, lwd = 2)
 
-plot(density(matched[[1]][, 13]), col = 'red', main = 'After Matching', xlab = 'Turbulence Intensity', lwd = 2, ylim = c(0, 8))
-lines(density(matched[[2]][,13]), col = 'blue', lwd = 2, ylim = c(0, 8))
-legend('topright',legend = c('data1', 'data2'), col=c("red", "blue"), lty=1, lwd = 2)
+plot(density(matched[[1]][, 13]), col = 'red', main = 'After Matching', xlab = 'Turbulence Intensity', lwd = 2, xlim = c(0, 0.8), ylim = c(0, 8))
+lines(density(matched[[2]][,13]), col = 'blue', lwd = 2, xlim = c(0, 0.8), ylim = c(0, 8))
+legend('topright', legend = c('data1', 'data2'), col=c("red", "blue"), lty=1, lwd = 2)
 
 ```
-![github_plot2](https://user-images.githubusercontent.com/49033958/69360049-74d09d80-0c4f-11ea-95ed-9c7a726ad91f.jpeg)
+![git_1](https://user-images.githubusercontent.com/49033958/69440659-d86dd000-0d0e-11ea-9d73-da840f432167.jpeg)
 
 ### 2. Matching many
 The function can be used to match, when the number of data sets are more than two.
@@ -119,17 +119,17 @@ matched = covmatch.mult(dname = dname, weight = weight, cov = cov, cov_circ = NU
 par(mfrow =  c(1, 2))
 par(bg = 'grey')
 
-plot(density(dname[[1]][, 1]), col = 'red', main = 'Before Matching', xlab = 'Wind Speed (m/s)', lwd = 2)
-lines(density(dname[[2]][,1]), col = 'blue', lwd = 2)
-lines(density(dname[[3]][,1]), col = 'green', lwd = 2)
-legend('topright',legend = c('Season1', 'Season2', 'Season3'), col=c("red", "blue"), lty=1, lwd = 2)
+plot(density(dname[[1]][, 1]), col = 'red', main = 'Before Matching', xlab = 'Wind Speed (m/s)', lwd = 2, xlim = c(0, 20), ylim = c(0, 0.18))
+lines(density(dname[[2]][, 1]), col = 'blue', lwd = 2, xlim = c(0, 20), ylim = c(0, 0.18))
+lines(density(dname[[3]][, 1]), col = 'green', lwd = 2, xlim = c(0, 20), ylim = c(0, 0.18))
+legend('topright',legend = c('Season1', 'Season2', 'Season3'), col=c("red", "blue", "green"), lty=1, lwd = 2)
 
-plot(density(matched[[1]][, 1]), col = 'red', main = 'After Matching', xlab = 'Wind Speed (m/s)', lwd = 2)
-lines(density(matched[[2]][,1]), col = 'blue', lwd = 2)
-lines(density(matched[[3]][,1]), col = 'green', lwd = 2)
-legend('topright',legend = c('Season1', 'Season2', 'Season3'), col=c("red", "blue"), lty=1, lwd = 2)
+plot(density(matched[[1]][, 1]), col = 'red', main = 'After Matching', xlab = 'Wind Speed (m/s)', lwd = 2, xlim = c(0, 20), ylim = c(0, 0.18))
+lines(density(matched[[2]][, 1]), col = 'blue', lwd = 2, xlim = c(0, 20), ylim = c(0, 0.18))
+lines(density(matched[[3]][, 1]), col = 'green', lwd = 2, xlim = c(0, 20), ylim = c(0, 0.18))
+legend('topright',legend = c('Season1', 'Season2', 'Season3'), col=c("red", "blue", "green"), lty=1, lwd = 2)
 ```
-![github_plot1](https://user-images.githubusercontent.com/49033958/69360137-a5b0d280-0c4f-11ea-8359-8bdedf90a1a5.jpeg)
+![git_1](https://user-images.githubusercontent.com/49033958/69439975-942e0000-0d0d-11ea-927a-2f2aa2666185.jpeg)
 
 Note :- Even covmatch.mult() function can be used to match two data sets, but it is suggested to use covmatch.binary() when the number of data sets are two.
 
