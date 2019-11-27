@@ -11,7 +11,7 @@
 #' @usage covmatch.binary(dname, cov, weight, cov_circ)
 #' @return The function returns a list containing after matched data sets.
 #' @export
-#' @import parallel
+#' @import foreach
 #' @examples
 #'
 #' fname <- list(data1, data2)
@@ -94,13 +94,14 @@ covmatch.binary = function(dname, cov, weight = 0.2, cov_circ = NULL ){
   # weight for threshold calculation
   weight = weight
 
-  # parrallel computation
-  cl = parallel::makeCluster(length(dname))
-  parallel::clusterExport(cl, varlist = list("match.cov","circ.positive"), envir = environment())
-  parallel::clusterEvalQ(cl,library(parallel))
-  parallel::clusterEvalQ(cl,library(matrixStats))
-  matched_data = (parallel::parLapply(cl, X = file_list, fun=covmatch.mult, cov=cov, weight = weight, cov_circ = cov_circ))
-  parallel::stopCluster(cl)
+  # sequential computation
+  `%do%` = foreach::`%do%`
+  matched_data = rep(list(), 2)
+  foreach::foreach(i = 1:2) %do% {
+
+  matched_data[[i]] = covmatch.mult(dname = file_list[[i]], cov = cov, weight = weight, cov_circ = cov_circ)
+
+  }
 
   ############# Retrieving datasets from 1st matching #########################
   # creating list of matched data set from step 1
