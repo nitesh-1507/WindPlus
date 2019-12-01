@@ -28,3 +28,7 @@ Imports:
     foreach,
     RcppArmadillo,
     matrixStats
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
