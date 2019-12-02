@@ -19,7 +19,7 @@
 #' weight <- c(0.2, 0.2, 0.2)
 #'
 #' matched_data = covmatch.mult(fname, cov = cov, weight = weight)
-covmatch.mult = function(dname, cov = NULL, weight = 0.2, cov_circ = NULL ){
+covmatch.mult = function(dname, cov = NULL, weight, cov_circ = NULL ){
 
   # Checks for number of data sets provided by user
   if(length(dname) < 2){

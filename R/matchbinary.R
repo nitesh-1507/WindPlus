@@ -19,7 +19,7 @@
 #' weight <- c(0.1, 0.1, 0.5)
 #'
 #' matched_data = covmatch.binary(fname, cov = cov, weight = weight)
-covmatch.binary = function(dname, cov, weight = 0.2, cov_circ = NULL ){
+covmatch.binary = function(dname, cov = NULL, weight = 0.2, cov_circ = NULL ){
 
   if(length(dname) != 2){
 
