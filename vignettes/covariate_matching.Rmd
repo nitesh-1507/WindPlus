@@ -1,5 +1,5 @@
 ---
-title: "covariate_matching"
+title: "Covariate Matching"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{covariate_matching}
@@ -9,11 +9,175 @@ vignette: >
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
+  fig.width=8, 
+  fig.height=4,
   collapse = TRUE,
   comment = "#>"
 )
 ```
 
+# Introduction
+
+The package aims at unveiling a unique technique called covariate matching, which takes in different data sets and returns data sets whose feature values exhibit similar characteristics or similar distribution.
+
+
+#  Theory
+Covariate matching methods are rooted in the statistical literature. In
+stabilizing the non-experimental discrepancy between non-treated and treated subjects of observational data, covariate distributions are adjusted by selecting non-treated subjects that have a similar covariate condition as that of treated ones. Through the process of matching, non-treated and treated groups become only randomly different on all background covariates, as if these covariates were designed by experimenters. As a result, the outcomes of the matched non-treated and treated groups, which keep the originally observed values, are comparable under the matched covariate conditions.
+
+### 1. Definition
+Covariate matching is a technique to adjust covariates distribution to make treated and non treated group to have the same covariates condition.
+
+### 2. Algorithm
+Covariate matching is broadly divided into steps : Hierarchial subgrouping and one to one matching.
+### Hierarchial subrouping - Filters data record in non-treated group which satifies the threshold condition for each data record in treated group.
+
+1. Locate a data record in the treated group, Q<sub>aft</sub>, and label it by the index j.
+
+2. Select one of the covariates, for instance, wind speed, V , and designate it as the variable of which the similarity between two data records is computed.
+
+3. Go through the data records in the non-treated group, Q<sub>bef</sub>, by selecting the subset of data records such that the difference, in terms of the designated covariate, between the data record j in Q<sub>aft</sub> and any one of the records in Q<sub>bef</sub> is smaller than a pre-specified threshold. When V is in fact the one designated in Step 2, the resulting subset is then labeled by placing V as the subscript to Q, namely Q<sub>V</sub>.
+
+4. Next, designate another covariate and use it to prune Q<sub>V</sub> in the same way as one prunes Q<sub>bef</sub> into Q<sub>V</sub> in Step 3. Doing so produces a smaller subset nested within Q<sub>V</sub> . Then continue with another covariate until all covariates are used.
+
+### One to One matching - returns the most similar data record after hierarchial sub-grouping
+
+1. Select the most similar record from Q<sub>bef</sub> for each Q<sub>aft</sub> using mahalanobis distance as the similarity measure.
+
+2. Remove the record from Q<sub>aft</sub>, if a record in Q<sub>bef</sub> satisfies the above mentioned criteria. 
+
+3. Repeat the process for each record in Q<sub>aft</sub>
+
+# Getting Started with WindPlus
 ```{r setup}
 library(WindPlus)
+```
+
+## Functions available
+
+1. Matching two data sets
+
+Function : covmatch.binary(dname, cov, weight, cov_circ)
+
+* dname - List of data sets to match
+* cov - position or column number of non circular covariates 
+* weight - threshold to skim out most similar observation
+* cov_circ - position or column number of circular covariates 
+
+2. Matching two data sets
+
+Function : covmatch.mult(dname, cov, weight, cov_circ)
+
+* dname - List of data sets to match
+* cov - position or column number of non circular covariates 
+* weight - threshold to skim out most similar observation
+* cov_circ - position or column number of circular covariates
+
+## Functions distinction
+
+Even though, the arguments seem pretty similar for both the functions, there is a subtle difference in execution. For matching multiple data sets, data set is matched once, whereas for macthing two data sets, the matching is done twice keeping each of the data set as a reference. Since the method is entirely subjective, an exact explanation of such is not possible.
+
+## Data set available
+
+1. Matching two data sets
+
+The two data sets attached to make use of function covmatch.binary for users are data1 and data2. The data can be made available after installing the package and loading the library. The data sets correspond to wind energy data set, and both of these are two different turbines data aggregated by 10 minutes over a year.
+
+
+```{r}
+head(data1)
+
+```
+
+
+```{r}
+head(data2)
+
+```
+
+1. Matching multiple data sets
+
+The three data sets attached to make use of function covmatch.mult for users are Season1, Season2 and Season3. The data sets correspond to wind energy data set of a single turbine, splitted in 3 seasons over a year.
+
+
+```{r}
+head(Season1)
+
+```
+
+
+```{r}
+head(Season2)
+
+```
+
+```{r}
+head(Season3)
+
+```
+## Functions to match
+
+1. Matching two data sets
+
+```{r}
+# Prepare data set for matching
+dname = rep(list(), 2)
+dname[[1]] = data1
+dname[[2]] = data2
+
+
+# Non circular covariates column
+cov = c(6, 1, 13)
+
+# Weight 
+weight = c(0.1, 0.1, 0.05)
+
+# Matching
+matched = covmatch.binary(dname = dname, weight = weight, cov = cov, cov_circ = NULL)
+
+# Commpare result of one covariate with original data
+par(mfrow =  c(1, 2))
+par(bg = 'grey')
+
+plot(density(dname[[1]][, 13]), col = 'red', main = 'Before Matching', xlab = 'Turbulence Intensity', lwd = 2, xlim = c(0, 0.8), ylim = c(0, 8))
+lines(density(dname[[2]][, 13]), col = 'blue', lwd = 2, ylim = c(0, 8), xlim = c(0, 0.8), ylim = c(0, 8))
+legend('topright', legend = c('data1', 'data2'), col=c("red", "blue"), lty=1, lwd = 2)
+
+plot(density(matched[[1]][, 13]), col = 'red', main = 'After Matching', xlab = 'Turbulence Intensity', lwd = 2, xlim = c(0, 0.8), ylim = c(0, 8))
+lines(density(matched[[2]][,13]), col = 'blue', lwd = 2, xlim = c(0, 0.8), ylim = c(0, 8))
+legend('topright', legend = c('data1', 'data2'), col=c("red", "blue"), lty=1, lwd = 2)
+```
+
+
+2. Matching multiple data sets
+
+```{r}
+# Prepare data set for matching
+dname = rep(list(), 3)
+dname[[1]] = Season1
+dname[[2]] = Season2
+dname[[3]] = Season3
+
+# Non circular covariates column
+cov = c(1, 6, 14)
+
+# Weight 
+weight = c(0.2, 0.2, 0.2)
+
+# Matching
+matched = covmatch.mult(dname = dname, weight = weight, cov = cov, cov_circ = NULL)
+
+# Commpare result of one covariate with original data
+par(mfrow =  c(1, 2))
+par(bg = 'grey')
+
+plot(density(dname[[1]][, 1]), col = 'red', main = 'Before Matching', xlab = 'Wind Speed (m/s)', lwd = 2, xlim = c(0, 20), ylim = c(0, 0.18))
+lines(density(dname[[2]][, 1]), col = 'blue', lwd = 2, xlim = c(0, 20), ylim = c(0, 0.18))
+lines(density(dname[[3]][, 1]), col = 'green', lwd = 2, xlim = c(0, 20), ylim = c(0, 0.18))
+legend('topright',legend = c('Season1', 'Season2', 'Season3'), col=c("red", "blue", "green"), lty=1, lwd = 2)
+
+plot(density(matched[[1]][, 1]), col = 'red', main = 'After Matching', xlab = 'Wind Speed (m/s)', lwd = 2, xlim = c(0, 20), ylim = c(0, 0.18))
+lines(density(matched[[2]][, 1]), col = 'blue', lwd = 2, xlim = c(0, 20), ylim = c(0, 0.18))
+lines(density(matched[[3]][, 1]), col = 'green', lwd = 2, xlim = c(0, 20), ylim = c(0, 0.18))
+legend('topright',legend = c('Season1', 'Season2', 'Season3'), col=c("red", "blue", "green"), lty=1, lwd = 2)
 ```
