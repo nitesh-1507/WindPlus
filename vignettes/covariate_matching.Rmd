@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 
 # Introduction
 
-The package aims at unveiling a unique technique called covariate matching, which takes in different data sets and returns data sets whose feature values exhibit similar characteristics or similar distribution.
+The package aims at unveiling a technique called covariate matching, which takes in different data sets and returns data sets whose feature values exhibit similar characteristics or similar distribution.
 
 
 #  Theory
