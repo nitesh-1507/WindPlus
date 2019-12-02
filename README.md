@@ -61,7 +61,7 @@ install.packages("devtools")
 **Step 3 (Build package using devtools):**
 
 ```R
-devtools::install_github("nitesh-1507/WindPlus")
+devtools::install_github("nitesh-1507/WindPlus", build_vignettes = TRUE)
 ```
 # Usage 
 The package can be used to match many different data sets. Broadly two functions are available to match the data sets provided by user.

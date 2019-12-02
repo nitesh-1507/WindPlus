@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 
 # Introduction
 
-The package aims at unveiling a technique called covariate matching, which takes in different data sets and returns data sets whose feature values exhibit similar characteristics or similar distribution.
+The package aims at unveiling a technique called covariate matching, which takes in different data sets and returns data sets whose feature values exhibit similar characteristics or similar distribution. In other words, if a wind speed of 3.2 m/s exists in one data set, the algorithm tries to find wind speed in the vicinity of 3.2 m/s in the other data set.
 
 
 #  Theory
@@ -30,6 +30,7 @@ Covariate matching is a technique to adjust covariates distribution to make trea
 
 ### 2. Algorithm
 Covariate matching is broadly divided into steps : Hierarchial subgrouping and one to one matching.
+
 ### Hierarchial subrouping - Filters data record in non-treated group which satifies the threshold condition for each data record in treated group.
 
 1. Locate a data record in the treated group, Q<sub>aft</sub>, and label it by the index j.
@@ -49,6 +50,9 @@ Covariate matching is broadly divided into steps : Hierarchial subgrouping and o
 3. Repeat the process for each record in Q<sub>aft</sub>
 
 # Getting Started with WindPlus
+
+Load the library
+
 ```{r setup}
 library(WindPlus)
 ```
@@ -60,18 +64,18 @@ library(WindPlus)
 Function : covmatch.binary(dname, cov, weight, cov_circ)
 
 * dname - List of data sets to match
-* cov - position or column number of non circular covariates 
-* weight - threshold to skim out most similar observation
-* cov_circ - position or column number of circular covariates 
+* cov - vector defining position or column number of non circular covariates such as wind speed, temperature etc.
+* weight - vector defining the threshold value for each covariate to skim out most similar observation
+* cov_circ - vector defining position or column number of circular covariates such as wind direction, nacelle position etc.
 
-2. Matching two data sets
+2. Matching multiple data sets
 
 Function : covmatch.mult(dname, cov, weight, cov_circ)
 
 * dname - List of data sets to match
-* cov - position or column number of non circular covariates 
-* weight - threshold to skim out most similar observation
-* cov_circ - position or column number of circular covariates
+* cov - vector defining position or column number of non circular covariates such as wind speed, temperature etc.
+* weight - vector defining the threshold value for each covariate to skim out most similar observation
+* cov_circ - vector defining position or column number of circular covariates such as wind direction, nacelle position etc.
 
 ## Functions distinction
 
@@ -115,7 +119,7 @@ head(Season2)
 head(Season3)
 
 ```
-## Functions to match
+## Usage
 
 1. Matching two data sets
 
@@ -181,3 +185,7 @@ lines(density(matched[[2]][, 1]), col = 'blue', lwd = 2, xlim = c(0, 20), ylim =
 lines(density(matched[[3]][, 1]), col = 'green', lwd = 2, xlim = c(0, 20), ylim = c(0, 0.18))
 legend('topright',legend = c('Season1', 'Season2', 'Season3'), col=c("red", "blue", "green"), lty=1, lwd = 2)
 ```
+
+## Result
+
+The task at hand is to find the observations from two or more different set, which exhibit similar characteristics. The functions return a list containing the data sets only with matched observations. It should be kept in mind that, only the supplied covariates are matched. Even though data set containing all the columns are returned back, the columns of interest should be looked into. 
