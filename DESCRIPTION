@@ -23,12 +23,11 @@ RoxygenNote: 7.0.1
 LinkingTo: 
     Rcpp,
     RcppArmadillo
-Imports: 
+Imports:
+    Rcpp,
     foreach,
     RcppArmadillo,
     matrixStats,
-    knitr,
-    rmarkdown
 Suggests: 
     knitr,
     rmarkdown
