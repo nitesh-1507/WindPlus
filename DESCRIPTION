@@ -24,10 +24,11 @@ LinkingTo:
     Rcpp,
     RcppArmadillo
 Imports: 
-    Rcpp,
     foreach,
     RcppArmadillo,
-    matrixStats
+    matrixStats,
+    knitr,
+    rmakdown
 Suggests: 
     knitr,
     rmarkdown
