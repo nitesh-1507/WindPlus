@@ -28,7 +28,7 @@ Imports:
     RcppArmadillo,
     matrixStats,
     knitr,
-    rmakdown
+    rmarkdown
 Suggests: 
     knitr,
     rmarkdown
