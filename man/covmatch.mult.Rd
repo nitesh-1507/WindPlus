@@ -12,8 +12,7 @@ covmatch.mult(dname, cov, weight, cov_circ)
 \item{cov}{Vector of column numbers for the covariates to be used in matching.}
 
 \item{weight}{Vector of threshold values, against which matching happens.
-It can be a single value such as 0.2, or vector such as c(0.2, 0.2, 0.3),
-considering three covariates.}
+It should be a vector such as c(0.2, 0.2, 0.3), if considering three covariates.}
 
 \item{cov_circ}{Vector stating the column position of circular variables such as wind direction,
 nacelle position etc.}
