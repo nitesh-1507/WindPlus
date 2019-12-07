@@ -28,6 +28,7 @@ Imports:
     foreach,
     RcppArmadillo,
     matrixStats,
+    knitr
 Suggests: 
     knitr,
     rmarkdown
