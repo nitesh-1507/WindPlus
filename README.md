@@ -94,6 +94,7 @@ weight = c(0.1, 0.1, 0.05)
 matched = covmatch.binary(dname = dname, weight = weight, cov = cov, cov_circ = NULL)
 
 # Commpare result of one covariate with original data
+dev.new(width = 550, height = 330, unit = "px")
 par(mfrow =  c(1, 2))
 par(bg = 'grey')
 
@@ -131,6 +132,7 @@ weight = c(0.2, 0.2, 0.2)
 matched = covmatch.mult(dname = dname, weight = weight, cov = cov, cov_circ = NULL)
 
 # Commpare result of one covariate with original data
+dev.new(width = 550, height = 330, unit = "px")
 par(mfrow =  c(1, 2))
 par(bg = 'grey')
 

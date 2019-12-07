@@ -8,7 +8,7 @@ Authors@R:
            email = "nitesh.kumar@tamu.edu",
            comment = c(ORCID = "YOUR-ORCID-ID"))
 Description: The idea is to take data set from different sources, and
-    and filter out observations from each which exhibit similar charactersitics.
+    filter out observations from each which exhibit similar charactersitics.
     The process of doing so is said to be covariates matching, where two different
     data set are matched using certain nummber of covariates, against a specified
     theshold. Further, the generated matched data set could be used to quantify the

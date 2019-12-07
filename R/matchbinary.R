@@ -4,8 +4,7 @@
 #' @param dname This should always be a list, containing all the data sets to match.
 #' @param cov Vector of column numbers for the covariates to be used in matching.
 #' @param weight Vector of threshold values, against which matching happens.
-#' It can be a single value such as 0.2, or vector such as c(0.2, 0.2, 0.3),
-#' considering three covariates.
+#' It should be a vector such as c(0.2, 0.2, 0.3), considering three covariates.
 #' @param cov_circ Vector stating the column position of circular variables such as wind direction,
 #'  nacelle position etc.
 #' @usage covmatch.binary(dname, cov, weight, cov_circ)
